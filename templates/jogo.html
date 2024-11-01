@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Detalhes do Jogo</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #fcfcfc;
+            font-family: Arial, sans-serif;
+        }
+        .header {
+            text-align: center;
+            margin-top: 20px;
+        }
+        .card {
+            margin: 20px auto;
+            max-width: 600px;
+            border-radius: 10px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+        }
+        .back-button {
+            margin-top: 20px;
+        }
+        .card-title {
+            color: #e67e22;
+        }
+        .card-text {
+            color: #34495e;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Detalhes do Jogo</h1>
+    </div>
+    <div class="container">
+        <div class="card">
+            <div class="card-body text-center">
+                <h2 class="card-title">{{ book.title }}</h2>
+                <p class="card-text">Aqui estão algumas informações sobre o jogo <strong>{{ book.title }}</strong>.</p>
+                <p class="card-text">Descrição: Um jogo emocionante e envolvente!</p>
+                <p class="card-text">Gênero: Ação/Aventura</p>
+                <p class="card-text">Ano de Lançamento: 2024</p>
+                <p class="card-text">Classificação: ★★★★☆</p>
+
+                <!-- Formulário para atualizar o título -->
+                <form method="POST" action="./update" class="mt-3">
+                    <input type="hidden" name="oldtitle" value="{{ book.title }}">
+                    <input type="text" name="newtitle" placeholder="Novo título" required class="form-control w-50 mx-auto">
+                    <input type="submit" value="Atualizar Título" class="btn btn-warning mt-2">
+                </form>
+
+                <a href="/" class="btn btn-secondary back-button">Voltar</a>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

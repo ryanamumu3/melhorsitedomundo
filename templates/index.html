@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>JOGOS 2024</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #f9f9f9;
+            font-family: Arial, sans-serif;
+        }
+        h1 {
+            color: #d35400;
+            text-align: center;
+            margin-top: 20px;
+        }
+        .game-item {
+            margin: 15px 0;
+            background-color: #fff;
+            border-radius: 8px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+            padding: 15px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .btn-info {
+            background-color: #3498db;
+            border: none;
+        }
+        .btn-info:hover {
+            background-color: #2980b9;
+        }
+        .form-container {
+            margin-bottom: 30px;
+        }
+    </style>
+</head>
+<body>
+    <h1>ADICIONE JOGOS</h1>
+    <div class="form-container text-center">
+        <form method="POST" action="/">
+            <input type="text" name="title" placeholder="Digite o nome do jogo" required class="form-control w-50 mx-auto">
+            <input type="submit" value="Adicionar" class="btn btn-primary mt-2">
+        </form>
+    </div>
+
+    <h1>JOGOS CADASTRADOS</h1>
+    <div class="container">
+        {% if books %}
+            {% for book in books %}
+            <div class="game-item">
+                <span>{{ book.title }}</span>
+                <div>
+                    <a href="{{ url_for('jogo', title=book.title) }}" class="btn btn-info btn-sm">Ver Detalhes</a>
+                    <form method="POST" action="./update" style="display: inline;">
+                        <input type="hidden" name="oldtitle" value="{{ book.title }}">
+                        <input type="text" name="newtitle" placeholder="Novo título" class="form-control-sm" required style="width: 150px; display: inline;">
+                        <input type="submit" value="Atualizar" class="btn btn-warning btn-sm">
+                    </form>
+                    <form method="POST" action="./delete" style="display: inline;">
+                        <input type="hidden" name="title" value="{{ book.title }}">
+                        <input type="submit" value="Deletar" class="btn btn-danger btn-sm">
+                    </form>
+                </div>
+            </div>
+            {% endfor %}
+        {% else %}
+            <p class="text-center">Nenhum jogo cadastrado ainda.</p>
+        {% endif %}
+    </div>
+</body>
+</html>
